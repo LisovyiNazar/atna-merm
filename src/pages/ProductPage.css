@@ -1,0 +1,34 @@
+.product__carousel--image {
+    max-width: 100%;
+    object-fit: cover;
+    max-height: 500px;
+}
+
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn {
+    display: none !important;
+}
+.product__price {
+    text-align: left;
+}
+
+.info_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info_container h1, .info_container p {
+    margin: 0;
+}
+
+.info_container h1 {
+    margin-right: 10px;
+}
+
+.info_name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
