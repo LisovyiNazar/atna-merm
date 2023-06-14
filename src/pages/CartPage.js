@@ -1,6 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Col, Container, Row, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import CheckoutForm from "../components/CheckoutForm";
@@ -15,7 +15,7 @@ function CartPage() {
     const userCartObj = user.cart;
     let cart = products.filter((product) => userCartObj[product._id] != null);
     const [increaseCart] = useIncreaseCartProductMutation();
-    const [decreaseCart] = useDecreaseCartProductMutation();
+    const [decreaseCart, { isLoading: isDecreaseLoading }] = useDecreaseCartProductMutation();
     const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
 
     function handleDecrease(product) {
@@ -65,11 +65,13 @@ function CartPage() {
                                                     <i 
                                                         className="fa fa-minus-circle" 
                                                         onClick={() => {
-                                                            const data = { productId: item._id, price: item.price, userId: user._id }
-                                                            if (user.cart[item._id] > 1) {
-                                                                handleDecrease(data)
-                                                            } else if (user.cart[item._id] === 1) {
-                                                                removeFromCart(data)
+                                                            if (!isDecreaseLoading) {
+                                                                const data = { productId: item._id, price: item.price, userId: user._id }
+                                                                if (user.cart[item._id] > 1) {
+                                                                    handleDecrease(data)
+                                                                } else if (user.cart[item._id] === 1) {
+                                                                    removeFromCart(data)
+                                                                }
                                                             }
                                                         }}
                                                     ></i>
