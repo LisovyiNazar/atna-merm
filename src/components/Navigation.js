@@ -60,9 +60,9 @@ function Navigation() {
                         {/* if user */}
                         {user && (
                             <>
-                                <Nav.Link style={{ position: "relative" }} onClick={handleToggleNotifications}>
+                                {/* <Nav.Link style={{ position: "relative" }} onClick={handleToggleNotifications}>
                                     <i className="fas fa-bell" ref={bellRef} data-count={unreadNotifications || null}></i>
-                                </Nav.Link>
+                                </Nav.Link> */}
                                 <NavDropdown title={`${user.email}`} id="basic-nav-dropdown">
                                     {user.isAdmin && (
                                         <>
