@@ -46,7 +46,7 @@ function CartPage() {
                                         <th>&nbsp;</th>
                                         <th>Назва</th>
                                         <th>Ціна</th>
-                                        <th>кількість</th>
+                                        <th>Кількість</th>
                                         <th>Сума</th>
                                     </tr>
                                 </thead>
@@ -62,7 +62,17 @@ function CartPage() {
                                             <td>₴{item.price}</td>
                                             <td>
                                                 <span className="quantity-indicator">
-                                                    <i className="fa fa-minus-circle" onClick={() => handleDecrease({ productId: item._id, price: item.price, userId: user._id })}></i>
+                                                    <i 
+                                                        className="fa fa-minus-circle" 
+                                                        onClick={() => {
+                                                            const data = { productId: item._id, price: item.price, userId: user._id }
+                                                            if (user.cart[item._id] > 1) {
+                                                                handleDecrease(data)
+                                                            } else if (user.cart[item._id] === 1) {
+                                                                removeFromCart(data)
+                                                            }
+                                                        }}
+                                                    ></i>
                                                     <span>{user.cart[item._id]}</span>
                                                     <i className="fa fa-plus-circle" onClick={() => increaseCart({ productId: item._id, price: item.price, userId: user._id })}></i>
                                                 </span>

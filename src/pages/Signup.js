@@ -10,9 +10,14 @@ function Signup() {
     const [name, setName] = useState("");
     const [signup, { error, isLoading, isError }] = useSignupMutation();
 
+
     function handleSignup(e) {
         e.preventDefault();
-        signup({ name, email, password });
+        signup({ name, email, password }).then((response) => {
+            if (response.data) {
+                window.location.replace('/')
+            }
+        })
     }
 
     return (
